@@ -1,0 +1,24 @@
+.todo {
+    margin: 0.5rem;
+    background-color: #afc8e4;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 1s ease;
+
+    .todo-item {
+        padding: 0rem 0.5rem;
+      }
+      
+    .todo li {
+        flex: 1;
+      }
+  }
+  
+  
+  
+  
+ 
