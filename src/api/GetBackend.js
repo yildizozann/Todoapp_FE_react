@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-    const GetBackend = async() => {
+    const GetBackend = async(url, port) => {
 
         try{
-            const response = await axios.get('http://127.0.0.1:8080/alltodo')
+            const response = await axios.get(`${url}:${port}/alltodo`)
             
             
             return response.data.todolist

@@ -4,6 +4,7 @@ import Todos from './components/Todos';
 import Todolist from './components/Todolist';
 import ReactDOM from "react-dom"
 import user from "@testing-library/user-event"
+
 afterEach(cleanup)
 test('renders without crashing', () => {
   render(<App />);
@@ -11,6 +12,8 @@ test('renders without crashing', () => {
   expect(linkElement).toBeInTheDocument();
   const div = document.createElement("div")
   ReactDOM.render(<button></button>,div)
+  user.type(screen.getByRole('textbox'), 'do homework!')
+  expect(screen.getByRole('textbox')).toHaveValue('do homework!')
 });
 test('render without crashing todos', () => {
   render(<Todos/>)
@@ -24,12 +27,4 @@ test('render without crashing todo list', () => {
   expect(screen.getAllByRole("listitem").length).toBe(2)
  
 })
-test('submit to do without crashing', () => {
-  render(<App />)
-  render(<Todos/>)
-  user.type(screen.getByRole('textbox'), 'do homework!')
-  expect(screen.getByRole('textbox')).toHaveValue('do homework!')
-  user.click(screen.getByRole("button",{name: /Submit/i}));
-  expect(screen.getByRole('list')).toBeInTheDocument("do homework!")
-});
 

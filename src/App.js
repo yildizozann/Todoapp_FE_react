@@ -4,6 +4,7 @@ import './App.scss';
 import Todolist from './components/Todolist';
 import PostBackend from './api/PostBackend';
 import GetBackend from './api/GetBackend';
+import apiUrl from './utils/apiUrl';
 
 
 function App() {
@@ -15,43 +16,44 @@ function App() {
   useEffect(() => {
     (async () => {
       let response;
-      response = await GetBackend()
-      setAllTodos(response.map(value => value.todo))
-      console.log("çalıştın mı yavru")
+      response = await GetBackend(apiUrl().url, apiUrl().port)
+      if (!!response) {
+        setAllTodos(response.map(value => value.todo))
+      }
     })();
-  }, [todos])
 
+  }, [isClicked])
+  
   const inputHandler = (e) => {
-    setInput(e.target.value)
+    setInput(e.target.value) 
   }
 
-  const submitHandler = async(e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    setTodos([
-      ...todos, input 
-    ])
-    let newData = {todo:input}
-    PostBackend(newData)
-    setInput("")    
+    let newData = { todo: input }
+    let response = await PostBackend(apiUrl().url, apiUrl().port, newData)
+    if (!!response) {
+      setInput("")
+      setIsClicked(!isClicked)
+      setTodos([
+        ...todos, input
+      ])
+    } 
   }
-  const getAPI = (e) => {
-    e.preventDefault();
-    setIsClicked(!isClicked)
-  }
+
   return (
     <div className="App">
       <header className="To Do List">
         To Do List
       </header>
-      
+
       <form>
-        <input hidden={isClicked} placeholder="Add To Do " value={input} onChange={inputHandler} type="text" className="todo-input" required />
-        <button hidden={isClicked} disabled={!input} onClick={submitHandler} type="submit" className="todo-button">Submit</button>
-        <button  className="todo-button" onClick={getAPI}>{isClicked ? "Add Todo" : "Show All"}</button>
+        <input placeholder="Add To Do " value={input} onChange={inputHandler} type="text" className="todo-input" required />
+        <button disabled={!input} onClick={submitHandler} type="submit" className="todo-button">Submit</button>
       </form>
+      <Todolist todos={allTodos} />
       
-      {isClicked ? <Todolist todos={allTodos} /> : <Todolist todos={todos} /> }
-       
+
 
     </div>
   );

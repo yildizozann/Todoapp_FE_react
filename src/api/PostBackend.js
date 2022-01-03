@@ -1,12 +1,12 @@
 import axios from 'axios';
     
-    const PostBackend = async(newtodo) => {
+    const PostBackend = async(url,port,newtodo) => {
        
         try{
-            const response = await axios.post('http://127.0.0.1:8080/newtodo', newtodo)
+            const response = await axios.post(`${url}:${port}/newtodo`, newtodo)
             
             
-            return console.log(response)
+            return response
            
     
         }catch(err){

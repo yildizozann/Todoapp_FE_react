@@ -1,0 +1,144 @@
+I, [2022-01-02T20:01:36.939694 #40961]  INFO -- : Registered expected interaction GET /alltodo
+D, [2022-01-02T20:01:36.941047 #40961] DEBUG -- : {
+  "description": "a request to get all todo",
+  "providerState": "todo's exist",
+  "request": {
+    "method": "GET",
+    "path": "/alltodo"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+    },
+    "body": {
+      "json_class": "Pact::SomethingLike",
+      "contents": {
+        "message": "Success",
+        "todolist": {
+          "json_class": "Pact::ArrayLike",
+          "contents": {
+            "todo": "dummy to do",
+            "_id": "61d18b57303533a3db43d7ef"
+          },
+          "min": 1
+        }
+      }
+    }
+  },
+  "metadata": null
+}
+I, [2022-01-02T20:01:36.952410 #40961]  INFO -- : Received request GET /alltodo
+D, [2022-01-02T20:01:36.952523 #40961] DEBUG -- : {
+  "path": "/alltodo",
+  "query": "",
+  "method": "get",
+  "headers": {
+    "Accept": "application/json, text/plain, */*",
+    "Referer": "http://localhost/",
+    "User-Agent": "Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/16.7.0",
+    "Accept-Language": "en",
+    "Origin": "http://localhost",
+    "Accept-Encoding": "gzip, deflate",
+    "Host": "localhost:5000",
+    "Connection": "keep-alive",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2022-01-02T20:01:36.952762 #40961]  INFO -- : Found matching response for GET /alltodo
+D, [2022-01-02T20:01:36.952845 #40961] DEBUG -- : {
+  "status": 200,
+  "headers": {
+  },
+  "body": {
+    "json_class": "Pact::SomethingLike",
+    "contents": {
+      "message": "Success",
+      "todolist": {
+        "json_class": "Pact::ArrayLike",
+        "contents": {
+          "todo": "dummy to do",
+          "_id": "61d18b57303533a3db43d7ef"
+        },
+        "min": 1
+      }
+    }
+  }
+}
+I, [2022-01-02T20:01:36.966473 #40961]  INFO -- : Verifying - interactions matched
+I, [2022-01-02T20:01:36.970566 #40961]  INFO -- : Cleared interactions
+I, [2022-01-02T20:01:36.976782 #40961]  INFO -- : Registered expected interaction POST /newtodo
+D, [2022-01-02T20:01:36.976881 #40961] DEBUG -- : {
+  "description": "a request to add todo",
+  "providerState": "todo's created",
+  "request": {
+    "method": "POST",
+    "path": "/newtodo",
+    "headers": {
+      "Content-Type": {
+        "json_class": "Pact::Term",
+        "data": {
+          "generate": "application/json; charset=utf-8",
+          "matcher": {
+            "json_class": "Regexp",
+            "o": 0,
+            "s": "application/json;?.*"
+          }
+        }
+      }
+    },
+    "body": {
+      "todo": "adding dummy todo"
+    }
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+    },
+    "body": {
+      "json_class": "Pact::SomethingLike",
+      "contents": {
+        "message": "New ToDo Added to Databese",
+        "todo": "adding dummy todo"
+      }
+    }
+  },
+  "metadata": null
+}
+I, [2022-01-02T20:01:36.982295 #40961]  INFO -- : Received request POST /newtodo
+D, [2022-01-02T20:01:36.982400 #40961] DEBUG -- : {
+  "path": "/newtodo",
+  "query": "",
+  "method": "post",
+  "body": {
+    "todo": "adding dummy todo"
+  },
+  "headers": {
+    "Content-Length": "28",
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/plain, */*",
+    "Referer": "http://localhost/",
+    "User-Agent": "Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/16.7.0",
+    "Accept-Language": "en",
+    "Origin": "http://localhost",
+    "Accept-Encoding": "gzip, deflate",
+    "Host": "localhost:5000",
+    "Connection": "keep-alive",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2022-01-02T20:01:36.983011 #40961]  INFO -- : Found matching response for POST /newtodo
+D, [2022-01-02T20:01:36.983078 #40961] DEBUG -- : {
+  "status": 201,
+  "headers": {
+  },
+  "body": {
+    "json_class": "Pact::SomethingLike",
+    "contents": {
+      "message": "New ToDo Added to Databese",
+      "todo": "adding dummy todo"
+    }
+  }
+}
+I, [2022-01-02T20:01:36.986955 #40961]  INFO -- : Verifying - interactions matched
+I, [2022-01-02T20:01:36.990550 #40961]  INFO -- : Cleared interactions
+I, [2022-01-02T20:01:36.993936 #40961]  INFO -- : Writing pact for todo-provider to /Users/OZAN1/Desktop/todo_app_fe/todo/pacts/todo-consumer-todo-provider.json

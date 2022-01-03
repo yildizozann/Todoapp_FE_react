@@ -1,0 +1,82 @@
+{
+  "consumer": {
+    "name": "todo-consumer"
+  },
+  "provider": {
+    "name": "todo-provider"
+  },
+  "interactions": [
+    {
+      "description": "a request to get all todo",
+      "providerState": "todo's exist",
+      "request": {
+        "method": "GET",
+        "path": "/alltodo"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        },
+        "body": {
+          "message": "Success",
+          "todolist": [
+            {
+              "todo": "dummy to do",
+              "_id": "61d18b57303533a3db43d7ef"
+            }
+          ]
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          },
+          "$.body.todolist": {
+            "min": 1
+          },
+          "$.body.todolist[*].*": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "a request to add todo",
+      "providerState": "todo's created",
+      "request": {
+        "method": "POST",
+        "path": "/newtodo",
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "todo": "adding dummy todo"
+        },
+        "matchingRules": {
+          "$.headers.Content-Type": {
+            "match": "regex",
+            "regex": "application\\/json;?.*"
+          }
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+        },
+        "body": {
+          "message": "New ToDo Added to Databese",
+          "todo": "adding dummy todo"
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
